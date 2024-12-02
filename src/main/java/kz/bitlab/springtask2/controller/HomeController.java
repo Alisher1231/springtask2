@@ -7,13 +7,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Controller
 public class HomeController {
-    @GetMapping
-    public String homePage(Model model){
+    @GetMapping("/")
+    public String homePage(Model model) {
 
         model.addAttribute("students", DBManager.getStudents());
         return "home";
@@ -21,11 +22,24 @@ public class HomeController {
 
 
     @GetMapping("/Add")
-    public void add(@RequestBody String name, String surname,int exam){
+    public String adpage(Model model) {
 
-        if(exam>90)
-        DBManager.add(name,surname,exam,"A");
+        return "Add";
+    }
 
+
+
+
+
+    @PostMapping("/Add")
+    public String add(@RequestParam String name,@RequestParam String surname,@RequestParam int exam) {
+
+        if (exam > 90) {
+            System.out.println("Salem");
+            DBManager.add(name, surname, exam, "A");
+        }
+
+        return "redirect:/";
     }
 
 
