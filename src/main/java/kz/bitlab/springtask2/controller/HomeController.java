@@ -28,11 +28,8 @@ public class HomeController {
     }
 
 
-
-
-
     @PostMapping("/Add")
-    public String add(@RequestParam String name,@RequestParam String surname,@RequestParam int exam) {
+    public String add(@RequestParam String name, @RequestParam String surname, @RequestParam int exam) {
 
         if (exam > 90) {
             System.out.println("Salem");
